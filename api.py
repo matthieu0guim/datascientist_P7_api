@@ -10,6 +10,7 @@ app = FastAPI()
 pickle_in = open("loan_risk_model.pkl", 'rb')
 model = pickle.load(pickle_in)
 
+data = pd.read_csv("api_data_sample.csv")
 # créer un dataframe pandas sur ce fichier pour avoir le sample de données. S'assurer qu'on a bien l'id du client.
 # 
 
@@ -27,6 +28,9 @@ def loan_risk(data:BankRisk):
     # c'est dans cette fonction que le model renvoie la proba et la classe
     return "OK"
 
+@app.post('/data')
+def print_data(data):
+    print(data.head())
 
 
 

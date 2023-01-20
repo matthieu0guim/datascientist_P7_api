@@ -32,16 +32,19 @@ def get_name(name:str):
 def loan_risk(customer: int):
     user_id = customer
     
-    user = data.loc[user_id].array.reshape(1,-1)
+    user = data.loc[[user_id]]#.array.reshape(1,-1)
     
     result = str(model.predict(user)[0])
     proba = str(np.round(model._model_impl.predict_proba(user)[0][0],4))
     to_print = ""
     if result == "0":
-        to_print = f"Votre dossier est susceptible d'être accepté. Vous avez une probabilité de solvabilité de {proba}"
+        prediction = f"Accepté"
+        # to_print = f"Votre dossier est susceptible d'être accepté. Vous avez une probabilité de solvabilité de {proba}"
     else:
-        to_print = f"Votre dossier n'a pas été accepté. Vous avez une probabilité de solvabilité de {proba}"
-    return {"résultat de la simulation": to_print}
+        prediction = "Refusé"
+        #to_print = f"Votre dossier n'a pas été accepté. Vous avez une probabilité de solvabilité de {proba}"
+    return {"prediction": prediction, "probabilité": proba}
+    #return {"résultat de la simulation": to_print}
 
 @app.post('/data')
 def print_data():

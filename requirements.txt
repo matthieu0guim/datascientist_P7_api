@@ -1,4 +1,4 @@
-absl-py @ file:///home/conda/feedstock_root/build_artifacts/absl-py_1665754496418/work
+absl-py 
 alembic @ file:///C:/b/abs_f3c87kdlan/croot/alembic_1666725259569/work
 anyio==3.6.1
 appdirs==1.4.4

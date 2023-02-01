@@ -6,6 +6,7 @@ import pickle
 from bank import BankRisk
 import pandas as pd
 import time
+from lime import lime_tabular 
 
 
 app = FastAPI()
@@ -15,6 +16,7 @@ model = pickle.load(pickle_in)
 data = pd.read_csv("api_data_sample.csv")
 data = data.rename(columns={"Unnamed: 0": "user_id"}).set_index("user_id")
 data.drop(columns='TARGET', inplace=True)
+
 # créer un dataframe pandas sur ce fichier pour avoir le sample de données. S'assurer qu'on a bien l'id du client.
 # 
 
@@ -45,6 +47,12 @@ def loan_risk(customer: int):
         #to_print = f"Votre dossier n'a pas été accepté. Vous avez une probabilité de solvabilité de {proba}"
     return {"prediction": prediction, "probabilité": proba}
     #return {"résultat de la simulation": to_print}
+
+@app.post('/local_interpretability')
+def get_local_interpretability(customer: int):
+    user_id = customer
+
+
 
 @app.post('/data')
 def print_data():

@@ -2,6 +2,5 @@ uvicorn
 fastapi
 numpy
 pandas
-lime 
-unittest
+lime
 gunicorn

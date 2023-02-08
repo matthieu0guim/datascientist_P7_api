@@ -38,7 +38,7 @@ class TestPrediction(unittest.TestCase):
     
     def test_value_returned(self):
         user_id = 177440
-        db = pd.read_csv("api_data_sample.csv", index_col='Unnamed: 0')
+        db = pd.read_csv("api_data_sample.csv", index_col='SK_ID_CURR')
         db.drop(columns=['TARGET'], inplace=True)
         print(model.predict(db.loc[[user_id]]))
         self.assertIn(model.predict(db.loc[[user_id]]), [0, 1])

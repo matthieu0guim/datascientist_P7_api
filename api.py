@@ -13,7 +13,8 @@ pickle_in = open("loan_risk_model.pkl", 'rb')
 model = pickle.load(pickle_in)
 
 data = pd.read_csv("api_data_sample.csv")
-data = data.rename(columns={"Unnamed: 0": "user_id"}).set_index("user_id")
+print(data.head())
+data = data.rename(columns={"SK_ID_CURR": "user_id"}).set_index("user_id")
 data.drop(columns='TARGET', inplace=True)
 
 # créer un dataframe pandas sur ce fichier pour avoir le sample de données. S'assurer qu'on a bien l'id du client.
@@ -24,9 +25,9 @@ def index():
     return {'message': data.head().to_json()}
 
 
-@app.get('/{name}')
-def get_name(name:str):
-    return {"Welcome to fastapi debute": f"{name}"}
+# @app.get('/{name}')
+# def get_name(name:str):
+#     return {"Welcome to fastapi debute": f"{name}"}
 
 @app.post('/predict')
 # def loan_risk(customer:BankRisk):
@@ -56,7 +57,8 @@ def get_local_interpretability(customer: int):
 
 @app.get('/data')
 def send_customers():
-    return list(data.index)
+    print('coucou')
+    return {"customers": list(data.index)}
 
 
 

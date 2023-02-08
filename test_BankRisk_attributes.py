@@ -30,14 +30,14 @@ class TestLoanRisk(unittest.TestCase):
 
 class TestUserIdExistence(unittest.TestCase):
     def test_is_user_in_db(self):
-        user_id = 218954
+        user_id = 177440
         db = pd.read_csv("api_data_sample.csv", index_col='SK_ID_CURR')
         self.assertIn(user_id, list(db.index))
 
 class TestPrediction(unittest.TestCase):
     
     def test_value_returned(self):
-        user_id = 218954
+        user_id = 177440
         db = pd.read_csv("api_data_sample.csv", index_col='Unnamed: 0')
         db.drop(columns=['TARGET'], inplace=True)
         print(model.predict(db.loc[[user_id]]))

@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 import pickle
 from bank import BankRisk
-import pandas as pd
 import time
 from lime import lime_tabular 
 
@@ -54,9 +53,10 @@ def get_local_interpretability(customer: int):
 
 
 
-@app.post('/data')
-def print_data():
-    return list(data.head().index)
+
+@app.get('/data')
+def send_customers():
+    return list(data.index)
 
 
 

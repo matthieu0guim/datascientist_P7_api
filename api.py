@@ -5,6 +5,7 @@ import pandas as pd
 import pickle
 from bank import BankRisk
 import time
+import json
 from lime import lime_tabular 
 
 
@@ -25,9 +26,15 @@ def index():
     return {'message': data.head().to_json()}
 
 
-# @app.get('/{name}')
-# def get_name(name:str):
-#     return {"Welcome to fastapi debute": f"{name}"}
+@app.get('/interpretability')
+def send_shap_values(client_id):
+    with open("client_interpretability.json", "r") as j:
+        shap_values = json.loads(j.read())
+        to_send = {"feature_names" :shap_values["feature_names"]}
+        print(type(to_send))
+        print(type(shap_values))
+        to_send[f"client_{client_id}_interpretability"] = shap_values[client_id]
+        return to_send
 
 @app.post('/predict')
 # def loan_risk(customer:BankRisk):

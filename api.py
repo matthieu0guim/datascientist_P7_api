@@ -15,7 +15,7 @@ model = pickle.load(pickle_in)
 data = pd.read_csv("api_data_sample.csv")
 print(data.head())
 data = data.rename(columns={"SK_ID_CURR": "user_id"}).set_index("user_id")
-data.drop(columns='TARGET', inplace=True)
+
 
 # créer un dataframe pandas sur ce fichier pour avoir le sample de données. S'assurer qu'on a bien l'id du client.
 # 

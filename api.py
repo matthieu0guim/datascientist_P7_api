@@ -34,6 +34,7 @@ def send_shap_values(client_id):
         print(type(to_send))
         print(type(shap_values))
         to_send[f"client_{client_id}_interpretability"] = shap_values[client_id]
+        to_send["expected_value"] = shap_values["expected_value"]
         return to_send
 
 @app.post('/predict')

@@ -28,7 +28,9 @@ def index():
 
 @app.get('/interpretability')
 def send_shap_values(client_id):
+    
     with open("client_interpretability.json", "r") as j:
+        print("open")
         shap_values = json.loads(j.read())
         to_send = {"feature_names" :shap_values["feature_names"]}
         print(type(to_send))

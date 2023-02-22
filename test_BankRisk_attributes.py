@@ -12,12 +12,12 @@ class TestBankRiskAttribute(unittest.TestCase):
         
 
     def test_attributes(self):
-        a = BankRisk(SK_ID_CURR=123456)
+        a = BankRisk(SK_ID_CURR=449102)
         self.assertEqual(1, len(a.__dict__), "Should be 1")
     
     
     def test_user_id_len(self):
-        user_id = 132456
+        user_id = 449102
         c = BankRisk(SK_ID_CURR=user_id)
         
         self.assertEqual(len(str(c.SK_ID_CURR)), 6, "Should be 6")
@@ -30,14 +30,14 @@ class TestLoanRisk(unittest.TestCase):
 
 class TestUserIdExistence(unittest.TestCase):
     def test_is_user_in_db(self):
-        user_id = 149115
+        user_id = 449102
         db = pd.read_csv("api_data_sample.csv", index_col='SK_ID_CURR')
         self.assertIn(user_id, list(db.index))
 
 class TestPrediction(unittest.TestCase):
     
     def test_value_returned(self):
-        user_id = 149115
+        user_id = 449102
         db = pd.read_csv("api_data_sample.csv", index_col='SK_ID_CURR')
         print(model.predict(db.loc[[user_id]]))
         self.assertIn(model.predict(db.loc[[user_id]]), [0, 1])

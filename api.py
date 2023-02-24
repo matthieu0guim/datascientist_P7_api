@@ -49,8 +49,8 @@ def loan_risk(customer: int):
     result = str(model.predict(user)[0])
     proba = str(np.round(model._model_impl.predict_proba(user)[0][0],4))
     to_print = ""
-    if result == "0":
-        prediction = f"Accepté"
+    if float(proba) > 0.48:
+        prediction = "Accepté"
         # to_print = f"Votre dossier est susceptible d'être accepté. Vous avez une probabilité de solvabilité de {proba}"
     else:
         prediction = "Refusé"

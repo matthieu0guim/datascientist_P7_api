@@ -36,19 +36,18 @@ def send_shap_values(client_id):
 def loan_risk(customer: int):
     user_id = customer
     
-    user = data.loc[[user_id]]#.array.reshape(1,-1)
+    user = data.loc[[user_id]]
     
-    result = str(model.predict(user)[0])
+    
     proba = str(np.round(model._model_impl.predict_proba(user)[0][0],4))
-    to_print = ""
     if float(proba) > 0.48:
         prediction = "Accepté"
-        # to_print = f"Votre dossier est susceptible d'être accepté. Vous avez une probabilité de solvabilité de {proba}"
+        
     else:
         prediction = "Refusé"
-        #to_print = f"Votre dossier n'a pas été accepté. Vous avez une probabilité de solvabilité de {proba}"
+        
     return {"prediction": prediction, "probabilité": proba}
-    #return {"résultat de la simulation": to_print}
+    
 
 
 
